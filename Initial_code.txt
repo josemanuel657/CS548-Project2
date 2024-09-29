@@ -1,0 +1,46 @@
+# Importing data analysis libraries
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Reading the dataset from the CSV's files
+from google.colab import drive
+drive.mount('/content/drive')
+file_path = '/content/drive/My Drive/Colab Notebooks/Project 2/data/appearances.csv'
+appearances = pd.read_csv(file_path)
+appearances.columns
+appearances.head()
+
+
+file_players = '/content/drive/My Drive/Colab Notebooks/Project 2/data/players.csv'
+players = pd.read_csv(file_players)
+players.columns
+limited_players = players[['player_id','current_club_id','country_of_birth','date_of_birth','sub_position', 'position','foot','height_in_cm','market_value_in_eur','highest_market_value_in_eur']]
+
+limited_players.head()
+
+
+file_clubs = '/content/drive/My Drive/Colab Notebooks/Project 2/data/clubs.csv'
+clubs = pd.read_csv(file_clubs)
+clubs.columns
+
+#clubs.head()
+
+
+file_clubgames = '/content/drive/My Drive/Colab Notebooks/Project 2/data/club_games.csv'
+club_games = pd.read_csv(file_clubgames)
+club_games.columns
+#club_games.head()
+
+
+file_games = '/content/drive/My Drive/Colab Notebooks/Project 2/data/games.csv'
+games = pd.read_csv(file_games)
+games.columns
+#games.head()
+
+# Merge all
+appearances_1 = appearances.merge(limited_players, on='player_id', how='left')
+appearances_1.columns
+appearances_2 = appearances_1.merge(games,on='game_id', how='left')
+appearances_2.columns
